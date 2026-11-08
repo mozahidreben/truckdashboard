@@ -109,6 +109,34 @@ iframe.on{visibility:visible;opacity:1;pointer-events:auto;z-index:2;transition:
 .mupd.old{color:#d97706}
 #mupd2:not(:empty)::before{content:" \00b7 "}
 @media(max-width:700px){#mupd{display:none}}
+
+/* ===== MOBILE UPGRADE: clean slim header on phones (desktop untouched) ===== */
+*{-webkit-tap-highlight-color:transparent}
+button{touch-action:manipulation}
+@media(max-width:700px){
+ @supports(height:100dvh){html,body{height:100dvh}}
+ body{padding-bottom:env(safe-area-inset-bottom,0px)}
+ #mh{padding:6px 12px!important;padding-top:calc(6px + env(safe-area-inset-top,0px))!important;gap:8px}
+ /* removed on phones: title, LIVE, updated time, date, clock, More menu */
+ .mtr,.msub,.mclk,#mmw,#mmenu,.live,#mupd,#mupd2{display:none!important}
+ .mb{flex:1 1 auto}
+ .mr{margin-left:auto;gap:8px}
+ .mlogo{height:28px!important;max-width:120px}
+ #mh #mthm,#mh #mref{min-width:38px;height:38px;padding:0!important;display:inline-flex;align-items:center;justify-content:center;font-size:17px;line-height:1}
+ #stale{font-size:12px;padding:6px 10px;gap:8px;flex-wrap:wrap}
+ #sm{padding:10px}
+ #sm .bx{padding:14px;max-height:92dvh;overflow:auto}
+ #smt{height:46vh}
+ #toast{bottom:calc(18px + env(safe-area-inset-bottom,0px));max-width:90vw;text-align:center}
+}
+/* phone turned sideways: keep the header slim so the table gets the room */
+@media(max-height:520px) and (orientation:landscape){
+ #mh{padding-top:calc(4px + env(safe-area-inset-top,0px));padding-bottom:4px}
+ .mlogo{height:30px!important}
+ #mt{font-size:15px!important}
+ .mclk,.live,#mupd{display:none!important}
+ #mh button{padding:5px 9px}
+}
 </style>
 </head>
 <body>
@@ -739,7 +767,94 @@ document.addEventListener('DOMContentLoaded',function(){
 td.nw::after{content:"NEW";display:block;width:max-content;margin:3px 0 0;padding:0 6px;border-radius:99px;background:#16a34a;color:#fff;font-size:9px;font-weight:800;letter-spacing:.06em;line-height:15px}
 @media(prefers-reduced-motion:reduce){tr.rflash,tr.rflash>td{animation:none!important}}
 tr.rflash{animation:rnf 2.6s ease-out 1}
-</style></head>
+</style><style id="mob">
+/* ===== MOBILE UPGRADE (phones + tablets only; desktop is untouched) ===== */
+html{-webkit-text-size-adjust:100%}
+body{-webkit-tap-highlight-color:transparent}
+button{touch-action:manipulation}
+.mctl{display:none}
+/* --- table with frozen columns (Req # and Truck stay on screen while you swipe sideways) --- */
+@media(max-width:1000px){
+ html:not(.cv) #reqview table.rsp{display:table!important;table-layout:fixed;width:1260px!important;min-width:1260px!important}
+ html:not(.cv) #reqview table.rsp thead{display:table-header-group}
+ html:not(.cv) #reqview table.rsp tbody{display:table-row-group}
+ html:not(.cv) #reqview table.rsp tbody tr{display:table-row;margin:0;padding:0;border:0;border-radius:0;box-shadow:none;background:var(--card)}
+ html:not(.cv) #reqview table.rsp tbody tr:nth-child(even){background:var(--stripe)}
+ html:not(.cv) #reqview table.rsp td{display:table-cell;width:auto;padding:10px 8px;border:0;border-bottom:1px solid var(--line2);text-align:left!important;vertical-align:top}
+ html:not(.cv) #reqview table.rsp td.num{text-align:right!important}
+ html:not(.cv) #reqview table.rsp th:last-child{text-align:right}
+ html:not(.cv) #reqview table.rsp td::before{content:none;display:none}
+ html:not(.cv) #reqview table.rsp td.empty{text-align:center!important;white-space:normal}
+ html:not(.cv) #reqview table.rsp .dt small{display:block;margin-left:0}
+ html:not(.cv) #reqview table.rsp .clamp{text-align:left}
+ html:not(.cv) #reqview table.rsp .lks{justify-content:flex-start}
+ html:not(.cv) #reqview table.rsp:has(td.empty){width:100%!important;min-width:0!important;table-layout:auto}
+ /* column widths (the Serial column is hidden here: the row number is not needed) */
+ html:not(.cv) #reqview table.rsp th:nth-child(1),html:not(.cv) #reqview table.rsp td:not(.empty):nth-child(1){display:none}
+ html:not(.cv) #reqview table.rsp th:nth-child(2){width:66px}
+ html:not(.cv) #reqview table.rsp th:nth-child(3){width:76px}
+ html:not(.cv) #reqview table.rsp th:nth-child(4){width:126px}
+ html:not(.cv) #reqview table.rsp th:nth-child(5){width:120px}
+ html:not(.cv) #reqview table.rsp th:nth-child(6){width:72px}
+ html:not(.cv) #reqview table.rsp th:nth-child(7){width:72px}
+ html:not(.cv) #reqview table.rsp th:nth-child(8){width:120px}
+ html:not(.cv) #reqview table.rsp th:nth-child(9){width:230px}
+ html:not(.cv) #reqview table.rsp th:nth-child(10){width:210px}
+ html:not(.cv) #reqview table.rsp th:nth-child(11){width:84px}
+ html:not(.cv) #reqview table.rsp th:nth-child(12){width:84px}
+ /* frozen: Req # (3) and Truck (6) */
+ html:not(.cv) #reqview table.rsp th{position:sticky;top:0;z-index:3}
+ html:not(.cv) #reqview table.rsp th:nth-child(3),html:not(.cv) #reqview table.rsp td:nth-child(3){position:sticky;left:0;box-shadow:inset -1px 0 0 var(--line)}
+ html:not(.cv) #reqview table.rsp th:nth-child(6),html:not(.cv) #reqview table.rsp td:nth-child(6){position:sticky;left:76px;box-shadow:inset -1px 0 0 var(--line),8px 0 10px -8px rgba(0,0,0,.4)}
+ html:not(.cv) #reqview table.rsp th:nth-child(3),html:not(.cv) #reqview table.rsp th:nth-child(6){z-index:5}
+ html:not(.cv) #reqview table.rsp tbody td:nth-child(3),html:not(.cv) #reqview table.rsp tbody td:nth-child(6){z-index:2;background:var(--card)}
+ html:not(.cv) #reqview table.rsp tbody tr:nth-child(even) td:nth-child(3),html:not(.cv) #reqview table.rsp tbody tr:nth-child(even) td:nth-child(6){background:var(--stripe)}
+ html:not(.cv) #reqview table.rsp tbody tr:hover td:nth-child(3),html:not(.cv) #reqview table.rsp tbody tr:hover td:nth-child(6){background:var(--hover,var(--hov))}
+ html:not(.cv) #reqview .tw{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+}
+/* --- phone layout: only the table scrolls, everything else stays in place --- */
+@media(max-width:700px){
+ html:not(.cv),html:not(.cv) body{height:100%}
+ html:not(.cv) body{display:flex;flex-direction:column;overflow:hidden}
+ html:not(.cv) .top{display:block;position:static;flex:none;box-shadow:none}
+ html:not(.cv) .topin{padding:8px 10px 8px;background:var(--bg)}
+ html:not(.cv) .kpis{margin-bottom:8px}
+ html:not(.cv) main{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;padding:0 10px 10px}
+ html:not(.cv) #msg{flex:none}
+ html:not(.cv) .tcard{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;margin:0}
+ html:not(.cv) .thead{flex:none}
+ html:not(.cv) #reqview{flex:1 1 0;min-height:0;position:relative}
+ html:not(.cv) #reqview .tw{position:absolute;top:0;right:0;bottom:0;left:0;max-height:none;overflow:auto}
+ html:not(.cv) #sumview{flex:1 1 0;min-height:0;overflow:auto;-webkit-overflow-scrolling:touch}
+ /* count + Filters + Table/Cards buttons on one tidy row */
+ .thead{padding:8px 10px;gap:8px;align-items:center}
+ .thead .sub{margin:0 auto 0 0;order:-1;font-size:12px;min-width:0}
+ .mctl{display:flex;gap:6px;flex:none}
+ .mctl button{padding:7px 11px;font-size:12.5px;font-weight:600;white-space:nowrap;border-radius:8px;min-height:34px}
+ .mctl button b{display:inline-block;margin-left:6px;background:var(--ac);color:#fff;border-radius:99px;font-size:11px;padding:0 6px;line-height:17px}
+ :root[data-theme=dark] .mctl button b{color:#042f2e}
+ .mctl button.act{border-color:var(--ac);color:var(--ac)}
+ /* filters: tidy grid, hidden until you tap Filters (cards view always shows them) */
+ .filters{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+ .filters .cb{grid-column:span 2;max-width:none;min-width:0;width:100%;font-size:16px;padding:8px;min-height:40px}
+ .filters .qd{grid-column:1/-1}
+ .filters .qd .chip{padding:9px 4px;font-size:13px}
+ .filters .mf{display:flex;grid-column:span 3;padding-left:8px}
+ .filters .mf span{font-size:11px}
+ .filters .mf input{flex:1;min-width:0;font-size:16px;min-height:38px}
+ .filters #clr{display:block;grid-column:1/-1;min-height:40px;color:var(--c-rejected);font-weight:600}
+ html:not(.fxo):not(.cv) .filters{display:none}
+ /* request popup: easy to close on a phone */
+ #modal .mtb button{min-height:42px}
+}
+/* phone turned sideways: top block scrolls with the page so the table is not squeezed */
+@media(max-height:520px) and (orientation:landscape){.top{position:static!important}}
+@media(max-width:700px){
+ .mtabs.mtop{display:flex;flex:none;width:auto;max-width:none;margin:8px 10px 6px}
+ .mtabs.mtop button{flex:1 1 0;justify-content:center;padding:10px 6px;font-size:13px}
+}
+</style>
+</head>
 <body>
 <div id="boot"><img src="logo.png" alt="" onerror="this.style.display='none'"><div class="spin"></div><div>Loading maintenance data…</div></div>
 <div class="top"><div id="bar"></div>
@@ -1185,16 +1300,51 @@ function move(){var on=d.querySelector('button.on');if(!on)return;
 window.setMTab=function(id){
   [].forEach.call(d.querySelectorAll('button'),function(b){var a=b.dataset.m===id;b.classList.toggle('on',a);b.setAttribute('aria-selected',a)});
   if(first){ind.style.transition='none';move();void ind.offsetWidth;ind.style.transition='';first=false}else move()};
-var h=document.querySelector('.thead h3');
-if(h){h.parentNode.insertBefore(d,h.nextSibling)}
-else{var bar=document.querySelector('.bar');if(bar)bar.insertBefore(d,bar.firstChild)}
-addEventListener('resize',function(){move()});
+var h=document.querySelector('.thead h3'),home=null,after=null;
+if(h){home=h.parentNode;after=h.nextSibling}
+else{var bar=document.querySelector('.bar');if(bar){home=bar;after=bar.firstChild}}
+var mqm=matchMedia('(max-width:700px)');
+function place(){
+  var top=document.querySelector('.top')||document.querySelector('.wrap');
+  if(mqm.matches&&top){d.classList.add('mtop');if(d.parentNode!==document.body||d.nextSibling!==top)document.body.insertBefore(d,top)}
+  else if(home){d.classList.remove('mtop');if(d.parentNode!==home)home.insertBefore(d,after&&after.parentNode===home?after:null)}
+  move();
+}
+place();
+addEventListener('resize',place);
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){move()});
 document.addEventListener('keydown',function(e){
   if(e.altKey&&!e.ctrlKey&&!e.metaKey){var i='123'.indexOf(e.key);if(i>-1){e.preventDefault();try{parent.show(T[i][0])}catch(x){}}}});
 try{if(parent.CUR)window.setMTab(parent.CUR)}catch(e){}
 })();
-</scr§ipt></bo§dy>
+</scr§ipt><scr§ipt>
+/* mobile: Filters button, Table/Cards switch (phones only) */
+(function(){
+ var H=document.documentElement,mq=matchMedia('(max-width:700px)'),K='rx.view',th=document.querySelector('.thead');
+ if(!th||document.getElementById('mfx'))return;
+ var w=document.createElement('div');w.className='mctl';
+ var bf=document.createElement('button');bf.type='button';bf.id='mfx';bf.title='Show / hide filters';
+ var bv=document.createElement('button');bv.type='button';bv.id='mvw';bv.title='Switch between table and cards';
+ w.appendChild(bf);w.appendChild(bv);th.appendChild(w);
+ var IDS=['fs','ft','ftr','ftk','fd','freq','m1','m2'],last='';
+ function view(){try{return localStorage.getItem(K)==='cards'?'cards':'table'}catch(e){return 'table'}}
+ function cnt(){var n=0;IDS.forEach(function(i){var e=document.getElementById(i);if(e&&e.value&&e.value.trim())n++});if(document.querySelector('.qd .chip.on'))n++;return n}
+ function paint(){
+  var cards=view()==='cards'&&mq.matches,c=cnt(),key=(cards?'c':'t')+c+(H.classList.contains('fxo')?'o':'x');
+  H.classList.toggle('cv',cards);
+  if(key===last)return;last=key;
+  bf.className=c?'act':'';bf.innerHTML='\u2699 Filters'+(c?'<b>'+c+'</b>':'');
+  bv.textContent=cards?'\u25A6 Table':'\u2630 Cards';
+  bf.style.display=cards?'none':'';
+ }
+ bf.onclick=function(){H.classList.toggle('fxo');paint()};
+ bv.onclick=function(){try{localStorage.setItem(K,view()==='cards'?'table':'cards')}catch(e){}last='';paint();var t=document.querySelector('#reqview .tw');if(t)t.scrollTop=0;window.scrollTo(0,0)};
+ ['input','change','click'].forEach(function(ev){document.addEventListener(ev,function(){setTimeout(paint,0)},true)});
+ if(mq.addEventListener)mq.addEventListener('change',function(){last='';paint()});else mq.addListener(function(){last='';paint()});
+ setInterval(paint,1500);paint();
+})();
+</scr§ipt>
+</bo§dy>
 </ht§ml>
 
 </script>
@@ -1582,7 +1732,49 @@ document.addEventListener('DOMContentLoaded',function(){
 td.nw::after{content:"NEW";display:block;width:max-content;margin:3px 0 0;padding:0 6px;border-radius:99px;background:#16a34a;color:#fff;font-size:9px;font-weight:800;letter-spacing:.06em;line-height:15px}
 @media(prefers-reduced-motion:reduce){tr.rflash,tr.rflash>td{animation:none!important}}
 tr.rflash>td{animation:rnf 2.6s ease-out 1}
-</style></head>
+</style><style id="mob">
+/* ===== MOBILE UPGRADE (phones only; desktop is untouched) ===== */
+body{-webkit-tap-highlight-color:transparent}
+button{touch-action:manipulation}
+@media(max-width:700px){
+ .mtabs.mtop{display:flex;flex:none;width:auto;max-width:none;margin:8px 10px 6px}
+ .mtabs.mtop button{flex:1 1 0;justify-content:center;padding:10px 6px;font-size:13px}
+ /* only the table scrolls; KPIs + filters stay compact on top */
+ .wrap{overflow:hidden!important;padding:0 8px 8px!important}
+ .stk{position:static!important;flex:none;padding-top:2px!important}
+ .kpis,.stk .kpis{grid-auto-columns:minmax(112px,1fr)!important;gap:6px!important;padding-bottom:6px!important;scrollbar-width:none;margin-bottom:4px}
+ .kpis::-webkit-scrollbar{display:none}
+ .kpi{padding:6px 8px 6px 11px!important}
+ .kpi b{font-size:17px!important}
+ .kpi small{font-size:11px!important}
+ .fbox{padding:6px;margin-bottom:6px}
+ .f1{display:grid!important;grid-template-columns:repeat(4,1fr);gap:6px}
+ .f1 .q{grid-column:1/-1;flex:none}
+ .f1 #fst,.f1 #fsort{grid-column:span 2}
+ .f1 input,.f1 select,.f1 button{min-width:0;width:100%;min-height:40px;padding:6px 8px;font-size:16px}
+ .f1 button{font-size:12.5px;padding:6px 2px;white-space:nowrap}
+ .f2{grid-template-columns:1fr 1fr!important;max-height:55vh;overflow:auto;padding:12px}
+ .f2 label input{font-size:16px;min-height:40px}
+ .bar{padding:0 2px 6px;gap:8px}
+ .bar .bt{display:none}
+ #cnt{font-size:12px}
+ main#list{flex:1 1 auto!important;min-height:0!important}
+ main#list .tw{flex:1 1 auto!important;max-height:none!important;min-height:0!important;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+ th{padding:9px 9px;font-size:10.5px}
+ td{padding:8px 9px;font-size:12.5px}
+ th:first-child,td.sl{min-width:34px}
+ td.fc{max-width:130px;overflow:hidden;text-overflow:ellipsis}
+ /* frozen first column (Station / Driver) while you swipe sideways */
+ th.fz{z-index:5}
+ td.fz{z-index:2}
+ th.fzl,td.fzl{box-shadow:inset -1px 0 0 var(--line),8px 0 10px -8px rgba(0,0,0,.4)}
+ tr.al>td.fzl{box-shadow:inset 3px 0 0 var(--red),inset -1px 0 0 var(--line),8px 0 10px -8px rgba(0,0,0,.4)}
+ .drw{width:100vw}
+ .rpb{width:94vw}
+}
+@media(max-height:520px) and (orientation:landscape){.stk{position:static!important}}
+</style>
+</head>
 <body>
 <div class="hero"><div class="hrow">
   <div class="brand"><div class="logo" id="logo"><svg viewBox="0 0 24 24"><path d="M3 16V8h11v8M14 11h4l3 3v2h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg></div><div><h1>Aramco Trip Tracker</h1><div class="sub0">Fuel supply · Station stock · Tanker trips</div></div></div>
@@ -2008,6 +2200,13 @@ function fit(){}
 /* freeze the first N columns: Supply = SL..Fuel (4), Trip = SL..Departure (7) */
 function freeze(){
   const w=document.querySelector('.tw'), t=w&&w.querySelector('table'); if(!t)return;
+  t.querySelectorAll('.fz').forEach(c=>{c.classList.remove('fz','fzl');c.style.left=''});
+  if(matchMedia('(max-width:700px)').matches){   // phones: keep the Station / Driver column frozen
+    const hr=t.tHead.rows[0], rs=[...t.tBodies[0].rows], r0=rs[0];
+    let k=r0?[...r0.cells].findIndex(c=>c.classList.contains('fc')):0; if(k<0)k=0;
+    [hr.cells[k],...rs.map(r=>r.cells[k])].forEach(c=>{ if(!c)return; c.classList.add('fz','fzl'); c.style.left='0px'; });
+    return;
+  }
   const n=TAB=='trip'?7:4, ths=[...t.tHead.rows[0].cells].slice(0,n);
   const ws=ths.map(h=>h.getBoundingClientRect().width);
   if(ws.reduce((a,b)=>a+b,0)>w.clientWidth*0.6) return;  // too narrow a screen: skip freezing
@@ -2437,10 +2636,18 @@ function move(){var on=d.querySelector('button.on');if(!on)return;
 window.setMTab=function(id){
   [].forEach.call(d.querySelectorAll('button'),function(b){var a=b.dataset.m===id;b.classList.toggle('on',a);b.setAttribute('aria-selected',a)});
   if(first){ind.style.transition='none';move();void ind.offsetWidth;ind.style.transition='';first=false}else move()};
-var h=document.querySelector('.thead h3');
-if(h){h.parentNode.insertBefore(d,h.nextSibling)}
-else{var bar=document.querySelector('.bar');if(bar)bar.insertBefore(d,bar.firstChild)}
-addEventListener('resize',function(){move()});
+var h=document.querySelector('.thead h3'),home=null,after=null;
+if(h){home=h.parentNode;after=h.nextSibling}
+else{var bar=document.querySelector('.bar');if(bar){home=bar;after=bar.firstChild}}
+var mqm=matchMedia('(max-width:700px)');
+function place(){
+  var top=document.querySelector('.top')||document.querySelector('.wrap');
+  if(mqm.matches&&top){d.classList.add('mtop');if(d.parentNode!==document.body||d.nextSibling!==top)document.body.insertBefore(d,top)}
+  else if(home){d.classList.remove('mtop');if(d.parentNode!==home)home.insertBefore(d,after&&after.parentNode===home?after:null)}
+  move();
+}
+place();
+addEventListener('resize',place);
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){move()});
 document.addEventListener('keydown',function(e){
   if(e.altKey&&!e.ctrlKey&&!e.metaKey){var i='123'.indexOf(e.key);if(i>-1){e.preventDefault();try{parent.show(T[i][0])}catch(x){}}}});

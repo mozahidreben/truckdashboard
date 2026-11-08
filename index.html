@@ -888,6 +888,30 @@ button{touch-action:manipulation}
  .mtabs.mtop{display:flex;flex:none;width:auto;max-width:none;margin:8px 10px 6px}
  .mtabs.mtop button{flex:1 1 0;justify-content:center;padding:10px 6px;font-size:13px}
 }
+
+/* ===== MOBILE CARD POLISH v1 (phones only) ===== */
+@media(max-width:700px){
+ #mvw{display:none!important}
+ html.cv #reqview table.rsp tbody{padding:10px 0 18px}
+ html.cv #reqview table.rsp tbody tr,html.cv #reqview table.rsp tbody tr:nth-child(even){
+  grid-template-columns:1fr 1fr 1fr;gap:10px 8px;margin:0 12px 12px;padding:14px;border-radius:16px;
+  box-shadow:0 1px 2px rgba(15,27,45,.06),0 8px 18px -10px rgba(15,27,45,.22);
+  content-visibility:auto;contain-intrinsic-size:auto 240px;transition:transform .12s ease}
+ html.cv #reqview table.rsp tbody tr:active{transform:scale(.985)}
+ html.cv #reqview table.rsp td:nth-child(3) .pill{font-size:13px;padding:3px 9px;font-weight:700}
+ html.cv #reqview table.rsp td:nth-child(2){font-size:12.5px;font-weight:600}
+ html.cv #reqview table.rsp .badge{font-size:12px;padding:3px 10px}
+ html.cv #reqview table.rsp td:nth-child(5){grid-row:2;font-size:16px;font-weight:700;padding-bottom:2px}
+ html.cv #reqview table.rsp td:nth-child(5)::before{display:none}
+ html.cv #reqview table.rsp td:nth-child(6),html.cv #reqview table.rsp td:nth-child(7),html.cv #reqview table.rsp td:nth-child(8){
+  grid-row:3;background:var(--bg2);border-radius:10px;padding:7px 9px;min-width:0}
+ html.cv #reqview table.rsp td:nth-child(9){font-size:13.5px;line-height:1.45;padding-top:10px}
+ html.cv #reqview table.rsp td:nth-child(10){font-size:12.5px}
+ html.cv #reqview table.rsp td:nth-child(11),html.cv #reqview table.rsp td:nth-child(12){padding-top:10px;border-top:1px dashed var(--line2);align-self:stretch}
+ html.cv #reqview table.rsp td:nth-child(12){font-size:18px;font-weight:800;color:var(--ac)}
+ html.cv #reqview table.rsp td{border-bottom:0!important}
+ html.cv #reqview table.rsp .lk{padding:6px 13px;font-size:13px}
+}
 </style>
 </head>
 <body>
@@ -1362,7 +1386,7 @@ try{if(parent.CUR)window.setMTab(parent.CUR)}catch(e){}
  var bv=document.createElement('button');bv.type='button';bv.id='mvw';bv.title='Switch between table and cards';
  w.appendChild(bf);w.appendChild(bv);th.appendChild(w);
  var IDS=['fs','ft','ftr','ftk','fd','freq','m1','m2'],last='';
- function view(){try{return localStorage.getItem(K)==='table'?'table':'cards'}catch(e){return 'cards'}}
+ function view(){return 'cards'}
  function cnt(){var n=0;IDS.forEach(function(i){var e=document.getElementById(i);if(e&&e.value&&e.value.trim())n++});if(document.querySelector('.qd .chip.on'))n++;return n}
  function paint(){
   var cards=view()==='cards'&&mq.matches,c=cnt(),key=(cards?'c':'t')+c+(H.classList.contains('fxo')?'o':'x');
@@ -1875,6 +1899,47 @@ button{touch-action:manipulation}
  .tw table.tb-stock td:nth-child(3),.tw table.tb-trip td:nth-child(2){font-size:15px}
  .tw table.tb-stock td:nth-child(2),.tw table.tb-stock td:nth-child(3){padding-bottom:0}
  .tw table.tb-stock td:nth-child(12),.tw table.tb-stock td:nth-child(9),.tw table.tb-trip td:nth-child(6),.tw table.tb-trip td:nth-child(8){padding-top:6px;border-top:1px dashed var(--line)!important}
+}
+
+/* ===== MOBILE CARD POLISH v1 (phones only) ===== */
+@media(max-width:700px){
+ .tw table.tb-stock tbody tr,.tw table.tb-trip tbody tr,
+ .tw table.tb-stock tbody tr:nth-child(even),.tw table.tb-trip tbody tr:nth-child(even){
+  padding:14px;margin:0 2px 12px;gap:10px 8px;border-radius:16px;
+  content-visibility:auto;contain-intrinsic-size:auto 230px;transition:transform .12s ease}
+ .tw table.tb-stock tbody tr:active,.tw table.tb-trip tbody tr:active{transform:scale(.985)}
+ .tw table.tb-stock td,.tw table.tb-trip td{font-size:13px;font-weight:600;line-height:1.35}
+ .tw table.tb-stock td::before,.tw table.tb-trip td::before{display:block;margin:0 0 2px;font-size:10px;letter-spacing:.05em;color:var(--mu);font-weight:700;text-transform:uppercase}
+ .tw table.tb-stock td:nth-child(3),.tw table.tb-trip td:nth-child(2){font-size:16px;font-weight:800;padding:0!important;border:0!important}
+ .tw table.tb-stock td:nth-child(4)::before{content:"Fuel"}
+ .tw table.tb-stock td:nth-child(5)::before{content:"Finished"}
+ .tw table.tb-stock td:nth-child(6)::before{content:"Arrived"}
+ .tw table.tb-stock td:nth-child(12)::before{content:"Driver"}
+ .tw table.tb-stock td:nth-child(13)::before{content:"Vehicle"}
+ .tw table.tb-stock td:nth-child(14)::before{content:"PO"}
+ .tw table.tb-stock td:nth-child(9)::before{content:"Aramco"}
+ .tw table.tb-stock td:nth-child(10)::before{content:"Meter"}
+ .tw table.tb-stock td:nth-child(11)::before{content:"Difference"}
+ .tw table.tb-stock td:nth-child(16)::before{content:"Remarks"}
+ .tw table.tb-stock td:nth-child(9),.tw table.tb-stock td:nth-child(10),.tw table.tb-stock td:nth-child(11){
+  background:var(--bg2)!important;border-radius:10px;padding:7px 9px!important;border:0!important}
+ .tw table.tb-stock td:nth-child(16){display:block;-webkit-line-clamp:unset;font-weight:500}
+ .tw table.tb-trip td:nth-child(3)::before{content:"Vehicle"}
+ .tw table.tb-trip td:nth-child(4)::before{content:"Aramco"}
+ .tw table.tb-trip td:nth-child(5)::before{content:"PO"}
+ .tw table.tb-trip td:nth-child(6)::before{content:"Fuel"}
+ .tw table.tb-trip td:nth-child(7)::before{content:"Departure"}
+ .tw table.tb-trip td:nth-child(11)::before{content:"Arrival"}
+ .tw table.tb-trip td:nth-child(8)::before{content:"Destination"}
+ .tw table.tb-trip td:nth-child(16)::before{content:"Duration"}
+ .tw table.tb-trip td:nth-child(12)::before{content:"Arrived at"}
+ .tw table.tb-trip td:nth-child(14)::before{content:"This month"}
+ .tw table.tb-trip td:nth-child(15)::before{content:"Last month"}
+ .tw table.tb-trip td:nth-child(9)::before{content:"Sealing staff"}
+ .tw table.tb-trip td:nth-child(10)::before{content:"Seal photo"}
+ .tw table.tb-trip td:nth-child(8),.tw table.tb-trip td:nth-child(6),.tw table.tb-stock td:nth-child(12){padding-top:0!important;border-top:0!important}
+ .tw table.tb-trip td:nth-child(16){font-size:15px;font-weight:800}
+ a.lk{padding:6px 13px;font-size:13px}
 }
 </style>
 </head>

@@ -61,6 +61,9 @@ iframe.on{visibility:visible;opacity:1;pointer-events:auto;z-index:2;transition:
 .mlogo{background:none!important;padding:0!important;border-radius:0!important;height:42px}
 #mt{color:var(--navy)!important;font-weight:700;font-size:18px!important;font-family:Inter,system-ui,sans-serif}
 #mt span{color:var(--ac)}
+#mt{display:flex!important;align-items:center;gap:10px;font-size:21px!important;letter-spacing:-.01em;line-height:1}
+#mt .mn{font-weight:800}
+#mt .mi{flex:none;display:block}
 .mclk b{color:var(--navy)!important;font-size:14px}.mclk span{color:var(--ac)!important;font-size:12.5px}
 #mh button{background:var(--inp)!important;color:var(--tx)!important;border:1px solid var(--line)!important;border-radius:8px!important}
 #mh button:hover{border-color:var(--ac)!important;color:var(--ac)!important}
@@ -142,7 +145,7 @@ button{touch-action:manipulation}
 <body>
 <header id="mh">
   <div class="mb"><img class="mlogo" src="logo.png" alt="Logo" onerror="this.style.display='none'">
-    <div><div class="mtr"><h1 id="mt"></h1><span class="live" title="Auto-synced with Google Sheets"><i></i>LIVE</span><span class="mupd" id="mupd" title="Last time the data was pulled from Google Sheets"></span></div><div class="msub"><span id="md"></span><span class="mupd" id="mupd2"></span></div></div></div>
+    <div><div class="mtr"><h1 id="mt"><svg class="mi" viewBox="0 0 52 30" width="44" height="26" aria-hidden="true"><rect x="17" y="3" width="31" height="16" rx="8" fill="var(--ac)"/><rect x="22" y="0.8" width="7" height="3.4" rx="1.2" fill="var(--ac)"/><path d="M2 19V10a2 2 0 0 1 2-2h7l5 6v5z" fill="var(--navy)"/><path d="M6 10.5h4l3 3.5H6z" fill="var(--card)"/><rect x="2" y="19" width="46" height="2.6" rx="1.2" fill="var(--navy)"/><path d="M32.5 6.5c2.2 2.8 3.6 4.4 3.6 6.2a3.6 3.6 0 0 1-7.2 0c0-1.8 1.4-3.4 3.6-6.2z" fill="#fff"/><g fill="var(--navy)" stroke="var(--card)" stroke-width="1.5"><circle cx="10" cy="22.5" r="4"/><circle cx="31" cy="22.5" r="4"/><circle cx="42" cy="22.5" r="4"/></g><g fill="var(--card)"><circle cx="10" cy="22.5" r="1.4"/><circle cx="31" cy="22.5" r="1.4"/><circle cx="42" cy="22.5" r="1.4"/></g></svg><b class="mn">Marona <span>Transport</span></b></h1><span class="live" title="Auto-synced with Google Sheets"><i></i>LIVE</span><span class="mupd" id="mupd" title="Last time the data was pulled from Google Sheets"></span></div><div class="msub"><span id="md"></span><span class="mupd" id="mupd2"></span></div></div></div>
   <div class="mr"><div class="mclk"><b id="mcd"></b><span id="mct"></span></div>
     <div id="mmw"><button id="mmore" title="More actions" aria-haspopup="true" aria-expanded="false">⋯ <span class="bt">More</span></button>
     <div id="mmenu" hidden>
@@ -1917,9 +1920,9 @@ button{touch-action:manipulation}
  .tw table.tb-stock td:nth-child(12)::before{content:"Driver"}
  .tw table.tb-stock td:nth-child(13)::before{content:"Vehicle"}
  .tw table.tb-stock td:nth-child(14)::before{content:"PO"}
- .tw table.tb-stock td:nth-child(9)::before{content:"Aramco"}
- .tw table.tb-stock td:nth-child(10)::before{content:"Meter"}
- .tw table.tb-stock td:nth-child(11)::before{content:"Difference"}
+ .tw table.tb-stock td:nth-child(9)::before{content:"Aramco (L)"}
+ .tw table.tb-stock td:nth-child(10)::before{content:"Meter (L)"}
+ .tw table.tb-stock td:nth-child(11)::before{content:"Difference (L)"}
  .tw table.tb-stock td:nth-child(16)::before{content:"Remarks"}
  .tw table.tb-stock td:nth-child(9),.tw table.tb-stock td:nth-child(10),.tw table.tb-stock td:nth-child(11){
   background:var(--bg2)!important;border-radius:10px;padding:7px 9px!important;border:0!important}
@@ -2021,6 +2024,7 @@ const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&g
 const nk=s=>String(s||'').toLowerCase().replace(/[^\p{L}\p{N}]/gu,'');
 const pad=n=>String(n).padStart(2,'0');
 const fmtN=n=>n==null?'':Math.round(n).toLocaleString('en-US')+' L';
+const fmtNn=n=>n==null?'':Math.round(n).toLocaleString('en-US');   // number only, unit (L) is shown in the table header
 const fdt=d=>d?`${pad(d.getDate())}/${pad(d.getMonth()+1)} ${pad(d.getHours())}:${pad(d.getMinutes())}`:'';
 const fdt2=d=>{if(!d)return '';const h=d.getHours();return `${pad(d.getDate())} ${MON[d.getMonth()]} ${d.getFullYear()} - ${pad(h%12||12)}:${pad(d.getMinutes())} ${h<12?'AM':'PM'}`};
 const iso=d=>d?`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`:'';
@@ -2104,7 +2108,7 @@ function build(data){
       const f = ongoing[key];
       const po = s.po;
       let diff = null;
-      if(po && poFirstAramco[po] != null && poMeterTotals[po] != null) diff = poFirstAramco[po] - poMeterTotals[po];
+      if(po && poFirstAramco[po] != null && poMeterTotals[po] != null) diff = poMeterTotals[po] - poFirstAramco[po];
       let hrs = null;
       if(f && f.fin && s.arr) hrs = Math.round((s.arr - f.fin) / 360000) / 10;
       rows.push({
@@ -2313,11 +2317,11 @@ const h24On=()=>$('fsort').value=='h24';
 const SC={Finished:'--red',Ok:'--green',Normal:'--blue','On the Way':'--amber',Arrived:'--green','Route Changed':'--so'};
 function tableHTML(l){
   const pc={}; l.forEach(r=>{ if(r.po) pc[r.po]=(pc[r.po]||0)+1; });
-  const H=['SL','Supervisor','Station','Fuel','Finished','Arrived','Resp. (h)','Status','Aramco','Meter','Difference','Driver','Vehicle','PO','Flags','Remarks','Files'];
+  const H=['SL','Supervisor','Station','Fuel','Finished','Arrived','Resp. (h)','Status','Aramco (L)','Meter (L)','Difference (L)','Driver','Vehicle','PO','Flags','Remarks','Files'];
   const b=l.map((r,i)=>{
     const flg=(r.meter==null && r.kind=='arr')?tag('No meter','--gray'):'';
-    const diff=r.diff==null?'':pill((r.diff>0?'+':'')+fmtN(r.diff),'--red',r.varf);
-    const dflt=r.diff!=null&&!r.varf?`<span class="sub">${(r.diff>0?'+':'')+fmtN(r.diff)}</span>`:diff;
+    const diff=r.diff==null?'':pill((r.diff>0?'+':'')+fmtNn(r.diff),'--red',r.varf);
+    const dflt=r.diff!=null&&!r.varf?`<span class="sub">${(r.diff>0?'+':'')+fmtNn(r.diff)}</span>`:diff;
     return`<tr data-i="${i}" tabindex="0" class="${(r.status=='Finished'||r.varf?'al':'')+(h24On()?' r24':'')+nCls(r)}">
       <td class="sl${isNewR(r)?' nw':''}">${i+1}</td>
       <td>${esc(r.sup)}</td>
@@ -2327,8 +2331,8 @@ function tableHTML(l){
       <td>${r.kind=='fin'?'':fdt2(r.arr)}</td>
       <td>${r.resp==null?'':r.resp}</td>
       <td>${pill(r.status,SC[r.status]||'--gray')}</td>
-      <td>${r.aq==null?'':fmtN(r.aq)}</td>
-      <td>${r.kind=='arr'?(r.meter==null?'<span class="none">none</span>':fmtN(r.meter)):''}</td>
+      <td>${r.aq==null?'':fmtNn(r.aq)}</td>
+      <td>${r.kind=='arr'?(r.meter==null?'<span class="none">none</span>':fmtNn(r.meter)):''}</td>
       <td>${r.varf?diff:dflt}</td>
       <td>${esc(r.drv)}</td>
       <td>${esc(r.veh)}</td>
@@ -2836,6 +2840,7 @@ var TABS=[
   {id:'trip', frame:'trip',inner:'trip',title:'Trip Report',h:['🛣','Trip ','Report',' Dashboard']}
 ];
 var $=function(id){return document.getElementById(id)};
+var BRAND='<svg class="mi" viewBox="0 0 52 30" width="44" height="26" aria-hidden="true"><rect x="17" y="3" width="31" height="16" rx="8" fill="var(--ac)"/><rect x="22" y="0.8" width="7" height="3.4" rx="1.2" fill="var(--ac)"/><path d="M2 19V10a2 2 0 0 1 2-2h7l5 6v5z" fill="var(--navy)"/><path d="M6 10.5h4l3 3.5H6z" fill="var(--card)"/><rect x="2" y="19" width="46" height="2.6" rx="1.2" fill="var(--navy)"/><path d="M32.5 6.5c2.2 2.8 3.6 4.4 3.6 6.2a3.6 3.6 0 0 1-7.2 0c0-1.8 1.4-3.4 3.6-6.2z" fill="#fff"/><g fill="var(--navy)" stroke="var(--card)" stroke-width="1.5"><circle cx="10" cy="22.5" r="4"/><circle cx="31" cy="22.5" r="4"/><circle cx="42" cy="22.5" r="4"/></g><g fill="var(--card)"><circle cx="10" cy="22.5" r="1.4"/><circle cx="31" cy="22.5" r="1.4"/><circle cx="42" cy="22.5" r="1.4"/></g></svg><b class="mn">Marona <span>Transport</span></b>';
 var CUR=null, PENDING={};   // PENDING[frame] = inner tab to select once that frame has loaded
 
 function frameEl(n){return $('f-'+n)}
@@ -2844,7 +2849,7 @@ function tabById(id){return TABS.filter(function(t){return t.id===id})[0]}
 /* highlight + url + title only (never clicks anything, so no loops) */
 function setActive(id){
   var t=tabById(id); if(!t) return; CUR=id;
-  $('mt').innerHTML='<i class="em">'+t.h[0]+'</i> '+t.h[1]+'<span>'+t.h[2]+'</span>'+t.h[3];
+  $('mt').innerHTML=BRAND;
   syncStrips();
   document.title='Reben — '+t.title;
   try{history.replaceState(null,'',location.pathname+location.search+'#'+id);localStorage.setItem('lastTab',id)}catch(e){}

@@ -768,65 +768,63 @@ td.nw::after{content:"NEW";display:block;width:max-content;margin:3px 0 0;paddin
 @media(prefers-reduced-motion:reduce){tr.rflash,tr.rflash>td{animation:none!important}}
 tr.rflash{animation:rnf 2.6s ease-out 1}
 </style><style id="mob">
-/* ===== MOBILE UPGRADE (phones + tablets only; desktop is untouched) ===== */
+/* ===== MOBILE UPGRADE (phones + small tablets only; desktop is untouched) ===== */
 html{-webkit-text-size-adjust:100%}
 body{-webkit-tap-highlight-color:transparent}
 button{touch-action:manipulation}
 .mctl{display:none}
-/* --- table with frozen columns (Req # and Truck stay on screen while you swipe sideways) --- */
-@media(max-width:1000px){
- html:not(.cv) #reqview table.rsp{display:table!important;table-layout:fixed;width:1260px!important;min-width:1260px!important}
- html:not(.cv) #reqview table.rsp thead{display:table-header-group}
- html:not(.cv) #reqview table.rsp tbody{display:table-row-group}
- html:not(.cv) #reqview table.rsp tbody tr{display:table-row;margin:0;padding:0;border:0;border-radius:0;box-shadow:none;background:var(--card)}
+/* --- phone table: every row fits the screen width (NO sideways scrolling) --- */
+@media(max-width:900px){
+ html:not(.cv) #reqview table.rsp{--gc:62px minmax(0,1fr) minmax(0,1.15fr) 104px;display:block!important;width:100%!important;min-width:0!important}
+ html:not(.cv) #reqview table.rsp thead{display:block;position:sticky;top:0;z-index:4;background:var(--hdl)}
+ html:not(.cv) #reqview table.rsp thead tr{display:grid;grid-template-columns:var(--gc);gap:0 10px;padding:10px 12px;background:var(--hdl);border-bottom:1px solid var(--hdb)}
+ html:not(.cv) #reqview table.rsp th{display:none;position:static;padding:0!important;border:0!important;text-align:left;white-space:nowrap;min-width:0;width:auto}
+ html:not(.cv) #reqview table.rsp th:nth-child(3){display:block;grid-column:1}
+ html:not(.cv) #reqview table.rsp th:nth-child(6){display:block;grid-column:2}
+ html:not(.cv) #reqview table.rsp th:nth-child(5){display:block;grid-column:3}
+ html:not(.cv) #reqview table.rsp th:nth-child(4){display:block;grid-column:4;text-align:right}
+ html:not(.cv) #reqview table.rsp tbody{display:block}
+ html:not(.cv) #reqview table.rsp tbody tr{display:grid;grid-template-columns:var(--gc);gap:4px 10px;align-items:start;margin:0;padding:10px 12px;border:0;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none;background:var(--card)}
  html:not(.cv) #reqview table.rsp tbody tr:nth-child(even){background:var(--stripe)}
- html:not(.cv) #reqview table.rsp td{display:table-cell;width:auto;padding:10px 8px;border:0;border-bottom:1px solid var(--line2);text-align:left!important;vertical-align:top}
- html:not(.cv) #reqview table.rsp td.num{text-align:right!important}
- html:not(.cv) #reqview table.rsp th:last-child{text-align:right}
+ html:not(.cv) #reqview table.rsp tbody tr:active{background:var(--hover,var(--hov))!important}
+ html:not(.cv) #reqview table.rsp td{display:block;width:auto;min-width:0;padding:0;border:0;background:transparent;text-align:left!important;white-space:normal;overflow-wrap:anywhere}
+ html:not(.cv) #reqview table.rsp td:empty{display:none}
  html:not(.cv) #reqview table.rsp td::before{content:none;display:none}
- html:not(.cv) #reqview table.rsp td.empty{text-align:center!important;white-space:normal}
- html:not(.cv) #reqview table.rsp .dt small{display:block;margin-left:0}
- html:not(.cv) #reqview table.rsp .clamp{text-align:left}
- html:not(.cv) #reqview table.rsp .lks{justify-content:flex-start}
- html:not(.cv) #reqview table.rsp:has(td.empty){width:100%!important;min-width:0!important;table-layout:auto}
- /* column widths (the Serial column is hidden here: the row number is not needed) */
- html:not(.cv) #reqview table.rsp th:nth-child(1),html:not(.cv) #reqview table.rsp td:not(.empty):nth-child(1){display:none}
- html:not(.cv) #reqview table.rsp th:nth-child(2){width:66px}
- html:not(.cv) #reqview table.rsp th:nth-child(3){width:76px}
- html:not(.cv) #reqview table.rsp th:nth-child(4){width:126px}
- html:not(.cv) #reqview table.rsp th:nth-child(5){width:120px}
- html:not(.cv) #reqview table.rsp th:nth-child(6){width:72px}
- html:not(.cv) #reqview table.rsp th:nth-child(7){width:72px}
- html:not(.cv) #reqview table.rsp th:nth-child(8){width:120px}
- html:not(.cv) #reqview table.rsp th:nth-child(9){width:230px}
- html:not(.cv) #reqview table.rsp th:nth-child(10){width:210px}
- html:not(.cv) #reqview table.rsp th:nth-child(11){width:84px}
- html:not(.cv) #reqview table.rsp th:nth-child(12){width:84px}
- /* frozen: Req # (3) and Truck (6) */
- html:not(.cv) #reqview table.rsp th{position:sticky;top:0;z-index:3}
- html:not(.cv) #reqview table.rsp th:nth-child(3),html:not(.cv) #reqview table.rsp td:nth-child(3){position:sticky;left:0;box-shadow:inset -1px 0 0 var(--line)}
- html:not(.cv) #reqview table.rsp th:nth-child(6),html:not(.cv) #reqview table.rsp td:nth-child(6){position:sticky;left:76px;box-shadow:inset -1px 0 0 var(--line),8px 0 10px -8px rgba(0,0,0,.4)}
- html:not(.cv) #reqview table.rsp th:nth-child(3),html:not(.cv) #reqview table.rsp th:nth-child(6){z-index:5}
- html:not(.cv) #reqview table.rsp tbody td:nth-child(3),html:not(.cv) #reqview table.rsp tbody td:nth-child(6){z-index:2;background:var(--card)}
- html:not(.cv) #reqview table.rsp tbody tr:nth-child(even) td:nth-child(3),html:not(.cv) #reqview table.rsp tbody tr:nth-child(even) td:nth-child(6){background:var(--stripe)}
- html:not(.cv) #reqview table.rsp tbody tr:hover td:nth-child(3),html:not(.cv) #reqview table.rsp tbody tr:hover td:nth-child(6){background:var(--hover,var(--hov))}
- html:not(.cv) #reqview .tw{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+ html:not(.cv) #reqview table.rsp td:not(.empty):nth-child(1){display:none}
+ html:not(.cv) #reqview table.rsp td:nth-child(3){grid-column:1;grid-row:1}
+ html:not(.cv) #reqview table.rsp td:nth-child(2){grid-column:1;grid-row:2;font-size:12px}
+ html:not(.cv) #reqview table.rsp td:nth-child(6){grid-column:2;grid-row:1}
+ html:not(.cv) #reqview table.rsp td:nth-child(7){grid-column:2;grid-row:2}
+ html:not(.cv) #reqview table.rsp td:nth-child(5){grid-column:3;grid-row:1;font-size:12.5px}
+ html:not(.cv) #reqview table.rsp td:nth-child(8){grid-column:3;grid-row:2}
+ html:not(.cv) #reqview table.rsp td:nth-child(4){grid-column:4;grid-row:1;text-align:right!important}
+ html:not(.cv) #reqview table.rsp td:nth-child(12){grid-column:4;grid-row:2;text-align:right!important;font-size:12.5px}
+ html:not(.cv) #reqview table.rsp td:nth-child(9){grid-column:1/4;grid-row:3;font-size:12.5px}
+ html:not(.cv) #reqview table.rsp td:nth-child(11){grid-column:4;grid-row:3;justify-self:end}
+ html:not(.cv) #reqview table.rsp td:nth-child(10){grid-column:1/-1;grid-row:4;font-size:12px;color:var(--tx2)}
+ html:not(.cv) #reqview table.rsp td:nth-child(10)::before{content:"Comment";display:block;color:var(--mu);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.03em}
+ html:not(.cv) #reqview table.rsp td.empty{display:block;grid-column:1/-1;text-align:center!important;padding:30px 0}
+ html:not(.cv) #reqview table.rsp .dt small{display:inline;margin-left:4px}
+ html:not(.cv) #reqview table.rsp .clamp{-webkit-line-clamp:2;text-align:left}
+ html:not(.cv) #reqview table.rsp .lks{justify-content:flex-end}
+ html:not(.cv) #reqview table.rsp .badge{font-size:11px;padding:2px 8px;white-space:nowrap}
+ html:not(.cv) #reqview table.rsp .tag{font-size:11.5px}
+ html:not(.cv) #reqview .tw{overscroll-behavior:contain;-webkit-overflow-scrolling:touch;overflow-x:hidden}
 }
-/* --- phone layout: only the table scrolls, everything else stays in place --- */
+/* --- phone layout: only the list scrolls, everything else stays in place --- */
 @media(max-width:700px){
- html:not(.cv),html:not(.cv) body{height:100%}
- html:not(.cv) body{display:flex;flex-direction:column;overflow:hidden}
- html:not(.cv) .top{display:block;position:static;flex:none;box-shadow:none}
- html:not(.cv) .topin{padding:8px 10px 8px;background:var(--bg)}
- html:not(.cv) .kpis{margin-bottom:8px}
- html:not(.cv) main{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;padding:0 10px 10px}
- html:not(.cv) #msg{flex:none}
- html:not(.cv) .tcard{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;margin:0}
- html:not(.cv) .thead{flex:none}
- html:not(.cv) #reqview{flex:1 1 0;min-height:0;position:relative}
- html:not(.cv) #reqview .tw{position:absolute;top:0;right:0;bottom:0;left:0;max-height:none;overflow:auto}
- html:not(.cv) #sumview{flex:1 1 0;min-height:0;overflow:auto;-webkit-overflow-scrolling:touch}
- /* count + Filters + Table/Cards buttons on one tidy row */
+ html,html body{height:100%}
+ html body{display:flex;flex-direction:column;overflow:hidden}
+ html .top{display:block;position:static;flex:none;box-shadow:none}
+ html .topin{padding:8px 10px 8px;background:var(--bg)}
+ html .kpis{margin-bottom:8px}
+ html main{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;padding:0 10px 10px}
+ html #msg{flex:none}
+ html .tcard{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;margin:0}
+ html .thead{flex:none}
+ html #reqview{flex:1 1 0;min-height:0;position:relative}
+ html #reqview .tw{position:absolute;top:0;right:0;bottom:0;left:0;max-height:none;overflow-y:auto}
+ html #sumview{flex:1 1 0;min-height:0;overflow:auto;-webkit-overflow-scrolling:touch}
  .thead{padding:8px 10px;gap:8px;align-items:center}
  .thead .sub{margin:0 auto 0 0;order:-1;font-size:12px;min-width:0}
  .mctl{display:flex;gap:6px;flex:none}
@@ -834,7 +832,6 @@ button{touch-action:manipulation}
  .mctl button b{display:inline-block;margin-left:6px;background:var(--ac);color:#fff;border-radius:99px;font-size:11px;padding:0 6px;line-height:17px}
  :root[data-theme=dark] .mctl button b{color:#042f2e}
  .mctl button.act{border-color:var(--ac);color:var(--ac)}
- /* filters: tidy grid, hidden until you tap Filters (cards view always shows them) */
  .filters{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
  .filters .cb{grid-column:span 2;max-width:none;min-width:0;width:100%;font-size:16px;padding:8px;min-height:40px}
  .filters .qd{grid-column:1/-1}
@@ -843,11 +840,49 @@ button{touch-action:manipulation}
  .filters .mf span{font-size:11px}
  .filters .mf input{flex:1;min-width:0;font-size:16px;min-height:38px}
  .filters #clr{display:block;grid-column:1/-1;min-height:40px;color:var(--c-rejected);font-weight:600}
- html:not(.fxo):not(.cv) .filters{display:none}
- /* request popup: easy to close on a phone */
+ html:not(.fxo) .filters{display:none}
  #modal .mtb button{min-height:42px}
 }
-/* phone turned sideways: top block scrolls with the page so the table is not squeezed */
+/* --- CARD VIEW: one card per request (phones) --- */
+@media(max-width:700px){
+ html.cv #reqview table.rsp{--gc:1fr 1fr 1fr;display:block!important;width:100%!important;min-width:0!important}
+ html.cv #reqview table.rsp thead{display:none}
+ html.cv #reqview table.rsp tbody{display:block;padding:8px 0 4px}
+ html.cv #reqview table.rsp tbody tr,html.cv #reqview table.rsp tbody tr:nth-child(even){display:grid;grid-template-columns:var(--gc);gap:9px 10px;align-items:start;margin:0 10px 10px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--card);box-shadow:var(--shadow)}
+ html.cv #reqview table.rsp tbody tr:active{background:var(--hover,var(--hov))!important}
+ html.cv #reqview table.rsp td{display:block;width:auto;min-width:0;padding:0;border:0;background:transparent;text-align:left!important;white-space:normal;overflow-wrap:anywhere}
+ html.cv #reqview table.rsp td:empty{display:none}
+ html.cv #reqview table.rsp td::before{content:none;display:none}
+ html.cv #reqview table.rsp td:not(.empty):nth-child(1){display:none}
+ html.cv #reqview table.rsp td:nth-child(3){grid-column:1;grid-row:1}
+ html.cv #reqview table.rsp td:nth-child(2){grid-column:2;grid-row:1;text-align:center!important;font-size:12px;color:var(--mu)}
+ html.cv #reqview table.rsp td:nth-child(4){grid-column:3;grid-row:1;text-align:right!important}
+ html.cv #reqview table.rsp td:nth-child(6){grid-column:1;grid-row:2}
+ html.cv #reqview table.rsp td:nth-child(7){grid-column:2;grid-row:2}
+ html.cv #reqview table.rsp td:nth-child(8){grid-column:3;grid-row:2}
+ html.cv #reqview table.rsp td:nth-child(5){grid-column:1/-1;grid-row:3;font-size:13.5px}
+ html.cv #reqview table.rsp td:nth-child(9){grid-column:1/-1;grid-row:4;font-size:13px;padding-top:8px;border-top:1px dashed var(--line2)}
+ html.cv #reqview table.rsp td:nth-child(10){grid-column:1/-1;grid-row:5;font-size:12.5px;color:var(--tx2)}
+ html.cv #reqview table.rsp td:nth-child(11){grid-column:1/3;grid-row:6;align-self:end}
+ html.cv #reqview table.rsp td:nth-child(12){grid-column:3;grid-row:6;text-align:right!important;font-size:15px;align-self:end}
+ html.cv #reqview table.rsp td:nth-child(6)::before,html.cv #reqview table.rsp td:nth-child(7)::before,html.cv #reqview table.rsp td:nth-child(8)::before,html.cv #reqview table.rsp td:nth-child(5)::before,html.cv #reqview table.rsp td:nth-child(9)::before,html.cv #reqview table.rsp td:nth-child(10)::before,html.cv #reqview table.rsp td:nth-child(12)::before{display:block;margin-bottom:2px;color:var(--mu);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+ html.cv #reqview table.rsp td:nth-child(6)::before{content:"Truck"}
+ html.cv #reqview table.rsp td:nth-child(7)::before{content:"Tanker"}
+ html.cv #reqview table.rsp td:nth-child(8)::before{content:"Type"}
+ html.cv #reqview table.rsp td:nth-child(5)::before{content:"Driver"}
+ html.cv #reqview table.rsp td:nth-child(9)::before{content:"Issue"}
+ html.cv #reqview table.rsp td:nth-child(10)::before{content:"Comment"}
+ html.cv #reqview table.rsp td:nth-child(12)::before{content:"Amount"}
+ html.cv #reqview table.rsp td.empty{display:block;grid-column:1/-1;text-align:center!important;padding:20px 0}
+ html.cv #reqview table.rsp td.empty::before{content:none;display:none}
+ html.cv #reqview table.rsp .dt small{display:inline;margin-left:4px}
+ html.cv #reqview table.rsp .clamp{-webkit-line-clamp:3;text-align:left}
+ html.cv #reqview table.rsp .lks{justify-content:flex-start}
+ html.cv #reqview table.rsp .badge{white-space:nowrap}
+ html.cv #reqview .tw{overscroll-behavior:contain;-webkit-overflow-scrolling:touch;overflow-x:hidden;border:0;background:transparent}
+ html.cv .tcard{background:transparent!important;border:0!important;box-shadow:none!important}
+ html.cv .thead{padding-left:2px;padding-right:2px}
+}
 @media(max-height:520px) and (orientation:landscape){.top{position:static!important}}
 @media(max-width:700px){
  .mtabs.mtop{display:flex;flex:none;width:auto;max-width:none;margin:8px 10px 6px}
@@ -1327,15 +1362,14 @@ try{if(parent.CUR)window.setMTab(parent.CUR)}catch(e){}
  var bv=document.createElement('button');bv.type='button';bv.id='mvw';bv.title='Switch between table and cards';
  w.appendChild(bf);w.appendChild(bv);th.appendChild(w);
  var IDS=['fs','ft','ftr','ftk','fd','freq','m1','m2'],last='';
- function view(){try{return localStorage.getItem(K)==='cards'?'cards':'table'}catch(e){return 'table'}}
+ function view(){try{return localStorage.getItem(K)==='table'?'table':'cards'}catch(e){return 'cards'}}
  function cnt(){var n=0;IDS.forEach(function(i){var e=document.getElementById(i);if(e&&e.value&&e.value.trim())n++});if(document.querySelector('.qd .chip.on'))n++;return n}
  function paint(){
   var cards=view()==='cards'&&mq.matches,c=cnt(),key=(cards?'c':'t')+c+(H.classList.contains('fxo')?'o':'x');
   H.classList.toggle('cv',cards);
   if(key===last)return;last=key;
   bf.className=c?'act':'';bf.innerHTML='\u2699 Filters'+(c?'<b>'+c+'</b>':'');
-  bv.textContent=cards?'\u25A6 Table':'\u2630 Cards';
-  bf.style.display=cards?'none':'';
+  bv.textContent=cards?'\u2630 List':'\u25A6 Cards';
  }
  bf.onclick=function(){H.classList.toggle('fxo');paint()};
  bv.onclick=function(){try{localStorage.setItem(K,view()==='cards'?'table':'cards')}catch(e){}last='';paint();var t=document.querySelector('#reqview .tw');if(t)t.scrollTop=0;window.scrollTo(0,0)};
@@ -1733,13 +1767,78 @@ td.nw::after{content:"NEW";display:block;width:max-content;margin:3px 0 0;paddin
 @media(prefers-reduced-motion:reduce){tr.rflash,tr.rflash>td{animation:none!important}}
 tr.rflash>td{animation:rnf 2.6s ease-out 1}
 </style><style id="mob">
-/* ===== MOBILE UPGRADE (phones only; desktop is untouched) ===== */
+/* ===== MOBILE UPGRADE (phones + small tablets only; desktop is untouched) ===== */
 body{-webkit-tap-highlight-color:transparent}
 button{touch-action:manipulation}
+/* --- phone rows: every record fits the screen width (NO sideways scrolling) --- */
+@media(max-width:900px){
+ .tw table.tb-stock,.tw table.tb-trip{--gc:1.2fr 1fr 1fr;display:block;width:100%;min-width:0}
+ .tw table.tb-stock thead,.tw table.tb-trip thead{display:none}
+ .tw table.tb-stock tbody,.tw table.tb-trip tbody{display:block}
+ .tw table.tb-stock tbody tr,.tw table.tb-trip tbody tr{display:grid;grid-template-columns:var(--gc);gap:4px 10px;align-items:start;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--card);cursor:pointer}
+ .tw table.tb-stock tbody tr:nth-child(even),.tw table.tb-trip tbody tr:nth-child(even){background:var(--stripe)}
+ .tw table.tb-stock tbody tr.r24,.tw table.tb-trip tbody tr.r24{background:#fef9c3}
+ :root[data-theme=dark] .tw table.tb-stock tbody tr.r24,:root[data-theme=dark] .tw table.tb-trip tbody tr.r24{background:color-mix(in srgb,#facc15 16%,var(--card))}
+ .tw table.tb-stock tbody tr.rnew:not(.al),.tw table.tb-trip tbody tr.rnew:not(.al){box-shadow:inset 3px 0 0 #16a34a}
+ .tw table.tb-stock tbody tr.al,.tw table.tb-trip tbody tr.al{box-shadow:inset 3px 0 0 var(--red)}
+ .tw table.tb-stock tbody tr:active,.tw table.tb-trip tbody tr:active{background:var(--hov)}
+ .tw table.tb-stock td,.tw table.tb-trip td{display:block;min-width:0!important;max-width:none!important;padding:0!important;border:0!important;background:transparent!important;text-align:left;white-space:normal;overflow:visible;text-overflow:clip;font-size:12.5px;box-shadow:none!important;overflow-wrap:anywhere}
+ .tw table.tb-stock td:empty,.tw table.tb-trip td:empty{display:none}
+ .tw table.tb-stock td::before,.tw table.tb-trip td::before{color:var(--mu);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin-right:5px}
+ /* ---- Supply & Finish ---- */
+ .tw table.tb-stock td:nth-child(1),.tw table.tb-stock td:nth-child(2),.tw table.tb-stock td:nth-child(7){display:none}
+ .tw table.tb-stock td:nth-child(3){grid-column:1/3;grid-row:1;font-weight:800;font-size:14px}
+ .tw table.tb-stock td:nth-child(8){grid-column:3;grid-row:1;text-align:right}
+ .tw table.tb-stock td:nth-child(4){grid-column:1;grid-row:2}
+ .tw table.tb-stock td:nth-child(5){grid-column:2;grid-row:2}
+ .tw table.tb-stock td:nth-child(5)::before{content:"Fin "}
+ .tw table.tb-stock td:nth-child(6){grid-column:3;grid-row:2}
+ .tw table.tb-stock td:nth-child(6)::before{content:"Arr "}
+ .tw table.tb-stock td:nth-child(12){grid-column:1;grid-row:3}
+ .tw table.tb-stock td:nth-child(13){grid-column:2;grid-row:3}
+ .tw table.tb-stock td:nth-child(14){grid-column:3;grid-row:3}
+ .tw table.tb-stock td:nth-child(14)::before{content:"PO "}
+ .tw table.tb-stock td:nth-child(9){grid-column:1;grid-row:4}
+ .tw table.tb-stock td:nth-child(9)::before{content:"Aramco "}
+ .tw table.tb-stock td:nth-child(10){grid-column:2;grid-row:4}
+ .tw table.tb-stock td:nth-child(10)::before{content:"Meter "}
+ .tw table.tb-stock td:nth-child(11){grid-column:3;grid-row:4}
+ .tw table.tb-stock td:nth-child(11)::before{content:"Diff "}
+ .tw table.tb-stock td:nth-child(16){grid-column:1/3;grid-row:5;color:var(--tx2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+ .tw table.tb-stock td:nth-child(16):empty{display:none}
+ .tw table.tb-stock td:nth-child(17){grid-column:3;grid-row:5;text-align:right}
+ .tw table.tb-stock td:nth-child(15){grid-column:1/-1;grid-row:6}
+ /* ---- Trip Report ---- */
+ .tw table.tb-trip td:nth-child(1){display:none}
+ .tw table.tb-trip td:nth-child(2){grid-column:1/3;grid-row:1;font-weight:800;font-size:14px}
+ .tw table.tb-trip td:nth-child(13){grid-column:3;grid-row:1;text-align:right}
+ .tw table.tb-trip td:nth-child(3){grid-column:1;grid-row:2}
+ .tw table.tb-trip td:nth-child(4){grid-column:2;grid-row:2}
+ .tw table.tb-trip td:nth-child(4)::before{content:"Aramco "}
+ .tw table.tb-trip td:nth-child(5){grid-column:3;grid-row:2}
+ .tw table.tb-trip td:nth-child(5)::before{content:"PO "}
+ .tw table.tb-trip td:nth-child(6){grid-column:1;grid-row:3}
+ .tw table.tb-trip td:nth-child(7){grid-column:2;grid-row:3}
+ .tw table.tb-trip td:nth-child(7)::before{content:"Dep "}
+ .tw table.tb-trip td:nth-child(11){grid-column:3;grid-row:3}
+ .tw table.tb-trip td:nth-child(11)::before{content:"Arr "}
+ .tw table.tb-trip td:nth-child(8){grid-column:1/3;grid-row:4}
+ .tw table.tb-trip td:nth-child(8)::before{content:"To "}
+ .tw table.tb-trip td:nth-child(16){grid-column:3;grid-row:4;text-align:right}
+ .tw table.tb-trip td:nth-child(12){grid-column:1;grid-row:5}
+ .tw table.tb-trip td:nth-child(12)::before{content:"At "}
+ .tw table.tb-trip td:nth-child(14){grid-column:2;grid-row:5}
+ .tw table.tb-trip td:nth-child(14)::before{content:"This mo "}
+ .tw table.tb-trip td:nth-child(15){grid-column:3;grid-row:5}
+ .tw table.tb-trip td:nth-child(15)::before{content:"Last mo "}
+ .tw table.tb-trip td:nth-child(9){grid-column:1/3;grid-row:6}
+ .tw table.tb-trip td:nth-child(9)::before{content:"Seal "}
+ .tw table.tb-trip td:nth-child(10){grid-column:3;grid-row:6;text-align:right}
+ .tw{overflow-x:hidden!important}
+}
 @media(max-width:700px){
  .mtabs.mtop{display:flex;flex:none;width:auto;max-width:none;margin:8px 10px 6px}
  .mtabs.mtop button{flex:1 1 0;justify-content:center;padding:10px 6px;font-size:13px}
- /* only the table scrolls; KPIs + filters stay compact on top */
  .wrap{overflow:hidden!important;padding:0 8px 8px!important}
  .stk{position:static!important;flex:none;padding-top:2px!important}
  .kpis,.stk .kpis{grid-auto-columns:minmax(112px,1fr)!important;gap:6px!important;padding-bottom:6px!important;scrollbar-width:none;margin-bottom:4px}
@@ -1760,19 +1859,23 @@ button{touch-action:manipulation}
  #cnt{font-size:12px}
  main#list{flex:1 1 auto!important;min-height:0!important}
  main#list .tw{flex:1 1 auto!important;max-height:none!important;min-height:0!important;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
- th{padding:9px 9px;font-size:10.5px}
- td{padding:8px 9px;font-size:12.5px}
- th:first-child,td.sl{min-width:34px}
- td.fc{max-width:130px;overflow:hidden;text-overflow:ellipsis}
- /* frozen first column (Station / Driver) while you swipe sideways */
- th.fz{z-index:5}
- td.fz{z-index:2}
- th.fzl,td.fzl{box-shadow:inset -1px 0 0 var(--line),8px 0 10px -8px rgba(0,0,0,.4)}
- tr.al>td.fzl{box-shadow:inset 3px 0 0 var(--red),inset -1px 0 0 var(--line),8px 0 10px -8px rgba(0,0,0,.4)}
  .drw{width:100vw}
  .rpb{width:94vw}
 }
 @media(max-height:520px) and (orientation:landscape){.stk{position:static!important}}
+@media(max-width:700px){
+ /* CARD look: one card per record */
+ .tw{border:0!important;background:transparent!important}
+ .tw table.tb-stock tbody,.tw table.tb-trip tbody{padding:2px 0 6px}
+ .tw table.tb-stock tbody tr,.tw table.tb-trip tbody tr,.tw table.tb-stock tbody tr:nth-child(even),.tw table.tb-trip tbody tr:nth-child(even){margin:0 0 10px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--card);box-shadow:var(--shadow);gap:6px 10px}
+ .tw table.tb-stock tbody tr.r24,.tw table.tb-trip tbody tr.r24{background:#fef9c3}
+ :root[data-theme=dark] .tw table.tb-stock tbody tr.r24,:root[data-theme=dark] .tw table.tb-trip tbody tr.r24{background:color-mix(in srgb,#facc15 16%,var(--card))}
+ .tw table.tb-stock tbody tr.al,.tw table.tb-trip tbody tr.al{box-shadow:inset 4px 0 0 var(--red),var(--shadow)}
+ .tw table.tb-stock tbody tr.rnew:not(.al),.tw table.tb-trip tbody tr.rnew:not(.al){box-shadow:inset 4px 0 0 #16a34a,var(--shadow)}
+ .tw table.tb-stock td:nth-child(3),.tw table.tb-trip td:nth-child(2){font-size:15px}
+ .tw table.tb-stock td:nth-child(2),.tw table.tb-stock td:nth-child(3){padding-bottom:0}
+ .tw table.tb-stock td:nth-child(12),.tw table.tb-stock td:nth-child(9),.tw table.tb-trip td:nth-child(6),.tw table.tb-trip td:nth-child(8){padding-top:6px;border-top:1px dashed var(--line)!important}
+}
 </style>
 </head>
 <body>
@@ -2169,7 +2272,7 @@ function tableHTML(l){
       <td class="rm">${esc(r.rem)}</td>
       <td>${lk(r.media,'📎')}</td>
     </tr>`}).join('');
-  return`<div class="tw"><table><thead><tr>${H.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${b}</tbody></table></div>`;
+  return`<div class="tw"><table class="tb-stock"><thead><tr>${H.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${b}</tbody></table></div>`;
 }
 function tripHTML(l){
   const pc={}; l.forEach(r=>{ if(r.po) pc[r.po]=(pc[r.po]||0)+1; });
@@ -2194,19 +2297,14 @@ function tripHTML(l){
       <td>${r.m2}</td>
       <td>${d}</td>
     </tr>`}).join('');
-  return`<div class="tw"><table><thead><tr>${H.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${b}</tbody></table></div>`;
+  return`<div class="tw"><table class="tb-trip"><thead><tr>${H.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${b}</tbody></table></div>`;
 }
 function fit(){}
 /* freeze the first N columns: Supply = SL..Fuel (4), Trip = SL..Departure (7) */
 function freeze(){
   const w=document.querySelector('.tw'), t=w&&w.querySelector('table'); if(!t)return;
   t.querySelectorAll('.fz').forEach(c=>{c.classList.remove('fz','fzl');c.style.left=''});
-  if(matchMedia('(max-width:700px)').matches){   // phones: keep the Station / Driver column frozen
-    const hr=t.tHead.rows[0], rs=[...t.tBodies[0].rows], r0=rs[0];
-    let k=r0?[...r0.cells].findIndex(c=>c.classList.contains('fc')):0; if(k<0)k=0;
-    [hr.cells[k],...rs.map(r=>r.cells[k])].forEach(c=>{ if(!c)return; c.classList.add('fz','fzl'); c.style.left='0px'; });
-    return;
-  }
+  if(matchMedia('(max-width:900px)').matches) return;   // phones: rows are laid out to fit the width, nothing to freeze
   const n=TAB=='trip'?7:4, ths=[...t.tHead.rows[0].cells].slice(0,n);
   const ws=ths.map(h=>h.getBoundingClientRect().width);
   if(ws.reduce((a,b)=>a+b,0)>w.clientWidth*0.6) return;  // too narrow a screen: skip freezing

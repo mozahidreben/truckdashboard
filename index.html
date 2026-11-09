@@ -330,6 +330,8 @@ td.num{font-weight:700;font-variant-numeric:tabular-nums;color:var(--navy)}
 .mtb #mwa{display:inline-flex;align-items:center;gap:6px;background:#25D366;color:#fff;border-color:#25D366;font-weight:600}
 .mtb #mwa:hover{background:#1ebe5a;border-color:#1ebe5a;color:#fff}
 .mtb #mwa svg{flex:none}
+.mtb #mwapdf{display:inline-flex;align-items:center;gap:6px;background:#25D366;color:#fff;border-color:#25D366;font-weight:600}
+.mtb #mwapdf:hover{background:#1ebe5a;border-color:#1ebe5a;color:#fff}
 .mhint{font-size:11.5px;color:var(--mu);text-align:right;margin-bottom:10px}
 .rf{border:1px solid #000;background:#fff;color:#000;font:13px/1.35 Arial,Helvetica,sans-serif}
 .rfh{display:flex;align-items:center;gap:12px;padding:10px 14px;min-height:80px}
@@ -965,7 +967,7 @@ button{touch-action:manipulation}
 </main>
 <div id="pr"></div>
 <div id="pf"></div>
-<div id="modal" role="dialog" aria-modal="true" aria-label="Maintenance request"><div class="box"><div class="mtb"><button class="p" id="mpr">🖨 Print</button><button id="mpdf">⬇ Save as PDF</button><button id="mwa"><svg viewBox="0 0 24 24" width="18" height="18" fill="#fff" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg><span>WhatsApp</span></button><button onclick="closeM()">✕ Close</button></div><div class="mhint">Print is A4 portrait. Save as PDF downloads the file automatically.</div><div id="mb"></div></div></div>
+<div id="modal" role="dialog" aria-modal="true" aria-label="Maintenance request"><div class="box"><div class="mtb"><button class="p" id="mpr">🖨 Print</button><button id="mpdf">⬇ Save as PDF</button><button id="mwa"><svg viewBox="0 0 24 24" width="18" height="18" fill="#fff" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg><span>WhatsApp</span></button><button id="mwapdf" title="Send the PDF file on WhatsApp">📕 <span>WhatsApp PDF</span></button><button onclick="closeM()">✕ Close</button></div><div class="mhint">Print is A4 portrait. Save as PDF downloads the file automatically.</div><div id="mb"></div></div></div>
 <scr§ipt>
 const SHEET_ID='1aoAcpQe3gbg3viwZHFvykgAKS1A_PgjgLp2sq8skEMY';
 const STATUSES=['Closed','Under Review','Renter','Rejected','No Status'];
@@ -1173,6 +1175,27 @@ function shareWA(){if(!CURR)return;const r=CURR;
  const t=`Truck Maintenance Request #${r.req||r.serial}\nDate: ${fdate(r.date)}\nTruck: ${r.truck}\nTanker: ${r.tanker}\nDriver: ${r.driver}\nParking: ${r.park}\nType: ${r.type}\nIssue: ${r.issue}`;
  if(navigator.share&&/Android|iPhone|iPad/i.test(navigator.userAgent))navigator.share({text:t}).catch(()=>{});
  else window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank')}
+async function shareWAPdf(){if(!CURR)return;
+ const b=$('mwapdf'),old=b.innerHTML,hint=document.querySelector('#modal .mhint'),oh=hint?hint.textContent:'';
+ b.disabled=true;b.textContent='⏳ Preparing…';
+ const host=document.createElement('div');host.className='pdfm';
+ host.style.cssText='position:fixed;left:0;top:0;width:190mm;z-index:-1';
+ host.innerHTML=formHTML(CURR,true);document.body.appendChild(host);
+ const shot=()=>html2canvas(host,{scale:2,useCORS:true,backgroundColor:'#ffffff'}).then(c=>({c,u:c.toDataURL('image/jpeg',.98)}));
+ const name='Truck Maintenance Request '+(CURR.req||CURR.serial)+'.pdf';
+ const txt='Truck Maintenance Request #'+(CURR.req||CURR.serial);
+ try{await loadLibs();
+  if(document.fonts&&document.fonts.ready)await document.fonts.ready;
+  let r;try{r=await shot()}catch(e){host.querySelectorAll('img').forEach(i=>i.remove());r=await shot()}
+  const pdf=new window.jspdf.jsPDF({unit:'mm',format:'a4',orientation:'portrait'});
+  const w=190,h=Math.min(277,w*r.c.height/r.c.width);
+  pdf.addImage(r.u,'JPEG',10,10,w,h);
+  const blob=pdf.output('blob'),file=new File([blob],name,{type:'application/pdf'});
+  if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],text:txt})}
+  else{saveBlob(blob,name);window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
+   if(hint){hint.textContent='PDF downloaded. Attach it in the WhatsApp chat that just opened.';setTimeout(()=>{hint.textContent=oh},9000)}}
+ }catch(e){if(e&&e.name!=='AbortError'&&hint){hint.textContent='Could not prepare the PDF. Try Save as PDF instead.';setTimeout(()=>{hint.textContent=oh},6000)}}
+ finally{host.remove();b.disabled=false;b.innerHTML=old}}
 function closeM(){$('modal').style.display='none';if(LASTF&&LASTF.focus&&document.contains(LASTF))LASTF.focus();LASTF=null}
 $('modal').onclick=e=>{if(e.target.id=='modal')closeM()};
 document.addEventListener('keydown',e=>{const m=$('modal');if(m.style.display!=='flex')return;
@@ -1277,7 +1300,7 @@ function buildPrint(){
  <tfoot><tr><td colspan="10">Total (${d.length} requests)</td><td class="r">${total.toLocaleString()}</td></tr></tfoot></table>`}
 window.addEventListener('beforeprint',()=>{if(!document.body.classList.contains('pf'))buildPrint()});
 window.addEventListener('afterprint',endForm);
-$('mpr').onclick=printForm;$('mpdf').onclick=savePDF;$('mwa').onclick=shareWA;
+$('mpr').onclick=printForm;$('mpdf').onclick=savePDF;$('mwa').onclick=shareWA;$('mwapdf').onclick=shareWAPdf;
 $('prt').onclick=()=>{buildPrint();window.print()};
 // ---------- QR code on the form ----------
 (function(){const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js';
@@ -1559,6 +1582,8 @@ a.lk:hover{background:var(--ac);color:#fff}
 .mtb #mdWa{display:inline-flex;align-items:center;gap:6px;background:#25D366;color:#fff;border-color:#25D366}
 .mtb #mdWa:hover{background:#1ebe5a;border-color:#1ebe5a;color:#fff}
 .mtb #mdWa svg{flex:none}
+.mtb #mdWaPdf{display:inline-flex;align-items:center;gap:6px;background:#25D366;color:#fff;border-color:#25D366}
+.mtb #mdWaPdf:hover{background:#1ebe5a;border-color:#1ebe5a;color:#fff}
 .mhint{font-size:11.5px;color:var(--mu);text-align:right;margin-bottom:10px}
 #mdl{position:fixed;inset:0;background:rgba(15,23,42,.45);display:none;align-items:center;justify-content:center;padding:16px;z-index:99}
 #mdl .box{color-scheme:light;--card:#fff;--line:#dfe6e4;--tx:#10231f;--mu:#6b7f7a;--ac:#0f766e;--inp:#fff;--hov:#e8f3f1;color:#10231f;background:#fff;border:1px solid #dfe6e4;border-radius:16px;max-width:760px;width:100%;max-height:90vh;overflow:auto;padding:20px;box-shadow:0 20px 50px rgba(15,23,42,.25)}
@@ -2006,7 +2031,7 @@ button{touch-action:manipulation}
   <div class="dbody" id="sbody"></div>
 </aside>
 
-<div id="mdl" role="dialog" aria-modal="true" aria-label="Report form"><div class="box"><div class="mtb"><button class="p" id="mdPrint">🖨 Print</button><button id="mdPdf">⬇ Save as PDF</button><button id="mdWa"><svg viewBox="0 0 24 24" width="18" height="18" fill="#fff" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg><span>WhatsApp</span></button><button id="mdClose">✕ Close</button></div><div class="mhint">Print is A4 portrait. Save as PDF downloads the file automatically.</div><div id="mdb"></div></div></div>
+<div id="mdl" role="dialog" aria-modal="true" aria-label="Report form"><div class="box"><div class="mtb"><button class="p" id="mdPrint">🖨 Print</button><button id="mdPdf">⬇ Save as PDF</button><button id="mdWa"><svg viewBox="0 0 24 24" width="18" height="18" fill="#fff" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg><span>WhatsApp</span></button><button id="mdWaPdf" title="Send the PDF file on WhatsApp">📕 <span>WhatsApp PDF</span></button><button id="mdClose">✕ Close</button></div><div class="mhint">Print is A4 portrait. Save as PDF downloads the file automatically.</div><div id="mdb"></div></div></div>
 <div id="pform"></div>
 
 <scr§ipt>
@@ -2758,6 +2783,24 @@ async function savePDF(){if(!CURR)return;const b=$('mdPdf'),old=b.textContent;b.
 function shareWA(){if(!CURR)return;const t=CURR.f.wa;
   if(navigator.share&&/Android|iPhone|iPad/i.test(navigator.userAgent))navigator.share({text:t}).catch(()=>{});
   else window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank')}
+async function shareWAPdf(){if(!CURR)return;const b=$('mdWaPdf'),old=b.innerHTML,hint=document.querySelector('#mdl .mhint'),oh=hint?hint.textContent:'';
+  b.disabled=true;b.textContent='⏳ Preparing…';
+  const host=document.createElement('div');host.className='pdfm';host.style.cssText='position:fixed;left:0;top:0;width:190mm;z-index:-1';
+  host.innerHTML=mForm(CURR.f);document.body.appendChild(host);
+  const shot=()=>html2canvas(host,{scale:2,useCORS:true,backgroundColor:'#ffffff'}).then(c=>({c,u:c.toDataURL('image/jpeg',.98)}));
+  const name=CURR.f.file+'.pdf',txt=CURR.f.title+(CURR.f.idv?' - '+CURR.f.idv:'');
+  try{await Promise.all([loadJS('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'),loadJS('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js')]);
+    if(document.fonts&&document.fonts.ready)await document.fonts.ready;
+    let r;try{r=await shot()}catch(e){host.querySelectorAll('.rfh img:not(.rfq)').forEach(i=>i.remove());r=await shot()}
+    const pdf=new window.jspdf.jsPDF({unit:'mm',format:'a4',orientation:'portrait'});
+    let w=190,h=w*r.c.height/r.c.width;if(h>277){h=277;w=h*r.c.width/r.c.height}
+    pdf.addImage(r.u,'JPEG',10,10,w,h);
+    const blob=pdf.output('blob'),file=new File([blob],name,{type:'application/pdf'});
+    if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],text:txt})}
+    else{dlFile(blob,name);window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
+      if(hint){hint.textContent='PDF downloaded. Attach it in the WhatsApp chat that just opened.';setTimeout(()=>{hint.textContent=oh},9000)}}
+  }catch(e){if(e&&e.name!=='AbortError'&&hint){hint.textContent='Could not prepare the PDF. Try Save as PDF instead.';setTimeout(()=>{hint.textContent=oh},6000)}}
+  finally{host.remove();b.disabled=false;b.innerHTML=old}}
 /* open the record a scanned QR code points to (?f=trip:PO or ?f=stock:PO) */
 function mOpenURL(){if(URLDONE)return;URLDONE=true;const id=new URLSearchParams(PL.search).get('f');if(!id)return;
   const k=id.split(':')[0];if(k!='trip'&&k!='stock')return;
@@ -2765,7 +2808,7 @@ function mOpenURL(){if(URLDONE)return;URLDONE=true;const id=new URLSearchParams(
   if(!r){const m=$('msg');m.textContent='That record was not found in the sheet.';m.style.display='block';return}
   if(TAB!=k){const b=document.querySelector('.tabs button[data-t="'+k+'"]');if(b)b.click()}
   openM(r)}
-$('mdPrint').onclick=printForm;$('mdPdf').onclick=savePDF;$('mdWa').onclick=shareWA;$('mdClose').onclick=closeM;
+$('mdPrint').onclick=printForm;$('mdPdf').onclick=savePDF;$('mdWa').onclick=shareWA;$('mdWaPdf').onclick=shareWAPdf;$('mdClose').onclick=closeM;
 window.addEventListener('afterprint',endForm);
 $('mdl').onclick=e=>{if(e.target.id=='mdl')closeM()};
 document.addEventListener('keydown',e=>{const m=$('mdl');if(m.style.display!=='flex')return;

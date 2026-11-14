@@ -140,6 +140,33 @@ button{touch-action:manipulation}
  .mclk,.live,#mupd{display:none!important}
  #mh button{padding:5px 9px}
 }
+
+/* ===== Password gate (Truck Maintenance) ===== */
+#pw{position:fixed;inset:0;z-index:100000;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(8,15,30,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);opacity:0;visibility:hidden;transition:opacity .22s,visibility .22s}
+#pw.on{opacity:1;visibility:visible}
+#pw .pwb{position:relative;width:100%;max-width:380px;background:var(--card);color:var(--tx);border:1px solid var(--line);border-radius:20px;padding:30px 26px 22px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.35);transform:translateY(16px) scale(.96);transition:transform .28s cubic-bezier(.2,.9,.3,1.2);overflow:hidden}
+#pw.on .pwb{transform:none}
+#pw .pwb:before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,var(--ac),#38bdf8)}
+#pw .pwi{width:64px;height:64px;margin:0 auto 14px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--ac) 14%,transparent);color:var(--ac)}
+#pw .pwi svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#pw h2{margin:0 0 4px;font-size:20px;font-weight:800;color:var(--navy)}
+#pw p{margin:0 0 18px;font-size:13.5px;color:var(--mu);line-height:1.45}
+#pw .pwf{position:relative}
+#pw input{width:100%;height:46px;padding:0 46px 0 14px;border:1.5px solid var(--line);border-radius:12px;background:var(--inp);color:var(--tx);font-size:16px;letter-spacing:.04em;outline:none;transition:border-color .15s,box-shadow .15s}
+#pw input:focus{border-color:var(--ac);box-shadow:0 0 0 4px color-mix(in srgb,var(--ac) 20%,transparent)}
+#pw .pwe{position:absolute;right:6px;top:6px;width:34px;height:34px;border:0;background:transparent;border-radius:8px;color:var(--mu);cursor:pointer;display:flex;align-items:center;justify-content:center}
+#pw .pwe:hover{color:var(--ac)}
+#pw .pwe svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#pw .pwm{min-height:20px;margin:8px 0 12px;font-size:13px;font-weight:600;color:#dc2626}
+#pw .pwa{display:flex;gap:10px}
+#pw .pwa button{flex:1;height:44px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;border:1.5px solid var(--line);background:transparent;color:var(--tx)}
+#pw .pwa button:hover{border-color:var(--ac)}
+#pw .pwa #pwok{background:var(--ac);border-color:var(--ac);color:#fff}
+#pw .pwa #pwok:disabled{opacity:.6;cursor:wait}
+:root[data-theme=dark] #pw .pwa #pwok{color:#042f2e}
+#pw .pwb.shake{animation:pwsh .4s}
+@keyframes pwsh{20%,60%{transform:translateX(-9px)}40%,80%{transform:translateX(9px)}}
+@media (prefers-reduced-motion:reduce){#pw,#pw .pwb{transition:none}#pw .pwb.shake{animation:none}}
 </style>
 </head>
 <body>
@@ -2841,6 +2868,14 @@ try{if(parent.CUR)window.setMTab(parent.CUR)}catch(e){}
 
 <!-- ============ MASTER: tab switching ============ -->
 <div id="sm" hidden><div class="bx"><h2>📋 Daily summary</h2><textarea id="smt" aria-label="Daily summary text"></textarea><div class="ac"><button id="smx">Close</button><button id="smw">WhatsApp</button><button id="smc">Copy</button></div></div></div>
+<div id="pw" role="dialog" aria-modal="true" aria-labelledby="pwt" aria-hidden="true"><div class="pwb">
+<div class="pwi"><svg viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2.5"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/><circle cx="12" cy="16" r="1.2"/></svg></div>
+<h2 id="pwt">Protected area</h2>
+<p>Truck Maintenance is password protected.<br>Enter the password to continue.</p>
+<div class="pwf"><input id="pwin" type="password" placeholder="Password" autocomplete="off" aria-label="Password"><button type="button" class="pwe" id="pwey" aria-label="Show password"><svg viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+<div class="pwm" id="pwms" role="alert"></div>
+<div class="pwa"><button type="button" id="pwcx">Cancel</button><button type="button" id="pwok">Unlock</button></div>
+</div></div>
 <div id="toast" role="status"></div>
 <script>
 /* ===== The two dashboards are stored as readable text in the two blocks above (src-truck, src-trip) ===== */
@@ -2912,7 +2947,7 @@ function onLoaded(n){
   try{ if(f.contentDocument.URL!=='about:srcdoc') return }catch(e){}
   if(f.dataset.wired) return; f.dataset.wired='1';
   f.dataset.ready='1'; updateLoader();
-  setTimeout(function(){loadFrame(n==='truck'?'trip':'truck')},250);   // preload the other page in the background
+  setTimeout(function(){var o=n==='truck'?'trip':'truck';if(o==='truck'&&!truckOK())return;loadFrame(o)},250);   // preload the other page in the background
   try{d=f.contentDocument}catch(e){return}
   // theme: inner toggle -> whole app
   try{
@@ -3063,6 +3098,58 @@ if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){
     if(window.caches) caches.keys().then(function(k){k.forEach(function(x){caches.delete(x)})}).catch(function(){});
   } else navigator.serviceWorker.register('sw.js').catch(function(){});
 }
+
+/* ===== Password gate: Truck Maintenance =====
+   To change the password: open the browser console (F12) and run
+   crypto.subtle.digest('SHA-256',new TextEncoder().encode('YOUR_NEW_PASSWORD')).then(b=>console.log([...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')))
+   then paste the result into TRUCK_HASH below. */
+var TRUCK_HASH='a249c39232291dfcc73216e2900ee002beeda5a83bf8ca89042388f51ef391ba';
+var PWK='truckUnlocked', pwDone=null, pwFails=0, pwLockUntil=0;
+function truckOK(){try{return sessionStorage.getItem(PWK)==='1'}catch(e){return false}}
+function sha(s){return crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)).then(function(b){return Array.prototype.map.call(new Uint8Array(b),function(x){return x.toString(16).padStart(2,'0')}).join('')})}
+function pwMsg(t){$('pwms').textContent=t||''}
+function pwClose(){$('pw').classList.remove('on');$('pw').setAttribute('aria-hidden','true');$('pwin').value='';pwMsg('');pwDone=null}
+function pwOpen(cb){
+  pwDone=cb;$('pwin').type='password';pwMsg('');$('pwin').value='';
+  $('pw').classList.add('on');$('pw').setAttribute('aria-hidden','false');
+  setTimeout(function(){$('pwin').focus()},120)}
+function pwTry(){
+  var left=Math.ceil((pwLockUntil-Date.now())/1000);
+  if(left>0){pwMsg('Too many attempts. Try again in '+left+'s');return}
+  var v=$('pwin').value; if(!v){pwMsg('Please enter the password');$('pwin').focus();return}
+  if(!(window.crypto&&crypto.subtle)){pwMsg('This page must be opened over HTTPS');return}
+  $('pwok').disabled=true;
+  sha(v).then(function(h){
+    $('pwok').disabled=false;
+    if(h===TRUCK_HASH){
+      try{sessionStorage.setItem(PWK,'1')}catch(e){}
+      var cb=pwDone; pwClose(); if(cb) cb();
+    }else{
+      pwFails++;
+      if(pwFails>=5){pwFails=0;pwLockUntil=Date.now()+30000;pwMsg('Too many attempts. Try again in 30s')}
+      else pwMsg('Wrong password. Try again.');
+      var b=$('pw').firstChild; b.classList.remove('shake'); void b.offsetWidth; b.classList.add('shake');
+      $('pwin').select();
+    }
+  }).catch(function(){$('pwok').disabled=false;pwMsg('Could not verify. Please try again.')});
+}
+$('pwok').onclick=pwTry;
+$('pwcx').onclick=pwClose;
+$('pwin').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();pwTry()}});
+$('pw').addEventListener('keydown',function(e){if(e.key==='Escape'){e.stopPropagation();pwClose()}});
+$('pw').addEventListener('mousedown',function(e){if(e.target===$('pw'))pwClose()});
+$('pwey').onclick=function(){var i=$('pwin');i.type=i.type==='password'?'text':'password';i.focus()};
+/* every way of opening the Truck tab (click, Alt+1, QR link, #truck, last used tab) goes through show() */
+var __show=show;
+show=function(id){
+  var t=tabById(id)||TABS[0];
+  if(t.id==='truck'&&!truckOK()){
+    if(!CUR) __show('stock');            // nothing visible yet: show a safe tab behind the pop-up
+    pwOpen(function(){__show('truck')});
+    return;
+  }
+  __show(id);
+};
 
 /* ===== Start: QR / shared links first, then #tab, then last used tab ===== */
 (function start(){
